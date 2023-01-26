@@ -33,10 +33,10 @@ $settings['error'] = [
 // Database settings
 $settings['db'] = [
     'driver' => 'mysql',
-    'host' => 'localhost',
+    'host' => '127.0.0.1',
     'username' => 'root',
-    'database' => 'libapi',
-    'password' => 'mysql',
+    'database' => 'services_web',
+    'password' => 'r00t_bd2',
     'charset' => 'utf8',
     'collation' => 'utf8_general_ci',
     'flags' => [

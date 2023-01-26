@@ -14,22 +14,12 @@ final class HomeAction
         
         $result = json_encode([
             'success' => true, 
-            'message' => 'Hello world!'
+            'message' => 'Bienvenue à mon premier API!!'
         ]);
         
         $response->getBody()->write($result);
 
         return $response->withHeader('Content-Type', 'application/json');
-        
-        /**
-         * Changer le code de statut de la réponse
-         * 
-         * return $response
-         *          ->withHeader('Content-Type', 'application/json')
-         *          ->withStatus(422);
-         * 
-         */
-
 
         return $response;
     }
