@@ -44,7 +44,7 @@ final class GreetingView
 
         // Tableau qui contient la réponse à retourner à l'usager
         $resultat = [
-            "codeLangue" => $salutation[0]['code'] ?? "",
+            "code" => $salutation[0]['code'] ?? "",
             "message" => $salutation[0]['message'] ?? "Aucune salutation trouvée"
         ];
 

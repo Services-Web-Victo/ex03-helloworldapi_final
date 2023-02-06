@@ -29,7 +29,11 @@ class GreetingRepository
      */
     public function selectGreetings(): array
     {
-        $sql = "SELECT message, code FROM helloworld ORDER BY RAND() LIMIT 1;";
+        $sql = "
+            SELECT s.message, l.code 
+            FROM salutations s INNER JOIN langages l ON l.id = s.langue_id 
+            ORDER BY RAND() LIMIT 1;
+        ";
 
         $query = $this->connection->prepare($sql);
         $query->execute();
@@ -48,7 +52,12 @@ class GreetingRepository
             'codeLangue' => $codeLangue,
         ];
 
-        $sql = "SELECT message, code FROM helloworld WHERE code=:codeLangue ORDER BY RAND() LIMIT 1;";
+        $sql = "
+            SELECT s.message, l.code 
+            FROM salutations s INNER JOIN langages l ON l.id = s.langue_id 
+            WHERE l.code=:codeLangue
+            ORDER BY RAND() LIMIT 1;
+        ";
 
         $query = $this->connection->prepare($sql);
         $query->execute($params);
@@ -56,6 +65,30 @@ class GreetingRepository
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
         return $result;
+    }
+
+    /**
+     * Ajoute un message de salutation
+     * 
+     * @param int $langueId Le id du code de langue 
+     * @param string $message Le message à ajouter
+     *
+     * @return int Le id du message ajouté
+     */
+    public function insertGreeting(int $langueId, string $message): int
+    {
+        $row = [
+            'langue_id' => $langueId,
+            'message' => $message
+        ];
+
+        $sql = "INSERT INTO salutations SET 
+                langue_id=:langue_id, 
+                message=:message";
+
+        $this->connection->prepare($sql)->execute($row);
+
+        return (int)$this->connection->lastInsertId();
     }
 
 }

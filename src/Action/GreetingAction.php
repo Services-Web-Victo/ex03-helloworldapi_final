@@ -24,7 +24,7 @@ final class GreetingAction
         // S'il n'y a pas de paramètre, retourne un tableau vide
         $queryParams = $request->getQueryParams() ?? [];
         // Récupération de la valeur du paramètre page
-        $codeLangue = $queryParams['langue'] ?? "";
+        $codeLangue = $queryParams['language'] ?? "";
 
         // Invoke the Domain with inputs and retain the result
         $resultat = $this->greetingView->selectRandomGreeting($codeLangue);
